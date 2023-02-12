@@ -25,7 +25,7 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
-        name: 'Creat by Andy'
+        name: 'Andy Wang'
     });
 })
 
@@ -55,12 +55,14 @@ app.get('/weather', (req, res) =>{
          return res.send({ error: error })
         }
         forcecast(longitude, latitude, (error, forcecastdata) => {
+            console.log(forcecastdata);
             if(error) {
                 return res.send({ error: error })
             }
+            
                res.send([{
                 forecast: forcecastdata,
-                loaction: location,
+                location,
                 address: req.query.address,
             }]);
         })
@@ -77,8 +79,6 @@ app.get('/products', (req, res) => {
         })
     }
 
-    // console.log(req.query.search);
-    
     res.send({
         products: [],
     });
